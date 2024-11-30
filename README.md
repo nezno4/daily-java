@@ -35,9 +35,9 @@ In project, we use different conventional types of branches and commits to facil
 
 ### How it Work
 > [!NOTE]
-> Each task is a new feature and has own branch. </br>
-> After finishing the task, merge it to the main branch using squash. </br>
-> Then we delete the branch and increase tag of version.
+> 1. Each task is a new feature and has own branch. </br>
+> 2. After finishing the task, merge it to the main branch using squash. </br>
+> 3. Then we delete the branch and increase tag of version.
 
 ### Pull Request Rules
 > [!IMPORTANT]

@@ -3,6 +3,7 @@
 - [Repository Description](#repository-description)
 - [Environment Description](#environment-description)
 - [Principles of Repository Organization](#principles-of-repository-organization)
+  - [How it Work](#how-it-work)
   - [Pull Request Rules](#pull-request-rules)
   - [Branch Description](#branch-description)
     - [Prefixes for Branch](#prefixes-for-branch)
@@ -32,10 +33,15 @@ In project, we use different conventional types of branches and commits to facil
 
 **Conventional Branches** (https://conventional-branch.github.io/)
 
+### How it Work
+Each task is a new feature and has own branch.
+After finishing the task, merge it to the main branch using squash.
+Then we delete the branch and increase tag of version.
+
 ### Pull Request Rules
 > [!IMPORTANT]
 > - <ins>Description:</ins> each pull request must contain a description of the changes made
-> - <ins>Merge Strategy:</ins> we prefer squash
+> - <ins>Merge Strategy:</ins> prefer squash
 > - <ins>No branch multiplication:</ins> after merging a pull request, the branch should be removed
 > - <ins>For Avoiding Conflicts:</ins>
 >   - kindly please minimize the lifespan of the branch

@@ -34,10 +34,10 @@ In project, we use different conventional types of branches and commits to facil
 **Conventional Branches** (https://conventional-branch.github.io/)
 
 ### How it Work
-
-Each task is a new feature and has own branch. </br>
-After finishing the task, merge it to the main branch using squash.
-Then we delete the branch and increase tag of version.
+> [!NOTE]
+> Each task is a new feature and has own branch. </br>
+> After finishing the task, merge it to the main branch using squash. </br>
+> Then we delete the branch and increase tag of version.
 
 ### Pull Request Rules
 > [!IMPORTANT]

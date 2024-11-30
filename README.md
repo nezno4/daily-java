@@ -34,6 +34,7 @@ In project, we use different conventional types of branches and commits to facil
 **Conventional Branches** (https://conventional-branch.github.io/)
 
 ### How it Work
+
 Each task is a new feature and has own branch.
 After finishing the task, merge it to the main branch using squash.
 Then we delete the branch and increase tag of version.

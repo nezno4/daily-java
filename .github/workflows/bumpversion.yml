@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
 
       - name: Creating a bump and changelog
-        id: cz-log
+        id: cz
         uses: commitizen-tools/commitizen-action@master
         with:
           github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN_CZ }}

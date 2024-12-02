@@ -27,8 +27,16 @@ jobs:
         uses: deepsourcelabs/test-coverage-action@master
         with:
           key: java 
-          coverage-file: target/site/jacoco/jacoco.xml
+          coverage-file: /reports/jacoco.xml
           dsn: ${{ secrets.DEEPSOURCE_DSN }}
+          
+      - name: Report results to DeepSource
+        run: |
+          curl https://deepsource.io/cli | sh
+          ./bin/deepsource report --analyzer test-coverage --key java --value-file ./reports/jacoco/jacoco.xml
+
+        env:
+          DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
 
       - name: Run DeepSource analysis
         uses: deepsourcelabs/deepsource-action@master

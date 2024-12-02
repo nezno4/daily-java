@@ -10,7 +10,7 @@ jobs:
   deepsource:
     runs-on: ubuntu-latest
     
-	steps:
+    steps:
       - name: Checkout code
         uses: actions/checkout@v3
       
@@ -23,18 +23,18 @@ jobs:
           architecture: x64
           check-latest: true
 
-	  - name: Build with Maven
+      - name: Build with Maven
         run: mvn clean install
-		
-	  - name: Run tests
+        
+      - name: Run tests
         run: mvn test
-		
-	  - name: Generate test coverage report
+        
+      - name: Generate test coverage report
         run: mvn jacoco:report
-		
-	  - name: Upload coverage report to DeepSource
+        
+      - name: Upload coverage report to DeepSource
         uses: deepsourcelabs/test-coverage-action@master
         with:
           key: java
-          coverage-file: /reports/jacoco.xml
+          coverage-file: reports/jacoco.xml
           dsn: ${{ secrets.DEEPSOURCE_DSN }}

@@ -1,0 +1,40 @@
+name: Bump Version and Create Changelog
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  bump-version:
+    if: "!startsWith(github.event.head_commit.message, 'bump:')"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'corretto'
+          java-package: jdk
+          architecture: x64
+          check-latest: true
+
+      - name: Install Commitizen
+        run: npm install -g commitizen
+
+      - name: Create bump and changelog
+        id: cz
+        uses: commitizen-tools/commitizen-action@master
+        with:
+          github_token: ${{ secrets.PERSONAL_ACCESS_TOKEN_CZ }}
+          changelog_increment_filename: CHANGELOG.md
+
+      - name: Print new version
+        run: echo "Bumped to version ${{ steps.cz.outputs.version }}"

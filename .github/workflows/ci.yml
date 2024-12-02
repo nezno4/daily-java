@@ -4,22 +4,32 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   deepsource:
     runs-on: ubuntu-latest
+    env:
+      DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+      
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
+          ref: ${{ github.event.pull_request.head.sha  || github.sha }}
       
       - name: Set up JDK
         uses: actions/setup-java@v3
         with:
           java-version: '17'
+          
+      - name: Build with Maven
+        run: |
+          mvn clean install
 
-      - name: Run tests and generate coverage report
+      - name: Run Tests and Generate Coverage
         run: |
           mvn clean test jacoco:report
 
@@ -29,17 +39,15 @@ jobs:
           key: java 
           coverage-file: /reports/jacoco.xml
           dsn: ${{ secrets.DEEPSOURCE_DSN }}
-          
-      - name: Report results to DeepSource
-        run: |
-          curl https://deepsource.io/cli | sh
-          ./bin/deepsource report --analyzer test-coverage --key java --value-file ./reports/jacoco/jacoco.xml
-
-        env:
-          DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
 
       - name: Run DeepSource analysis
         uses: deepsourcelabs/deepsource-action@master
         with:
           dsn: ${{ secrets.DEEPSOURCE_DSN }}
+          
+      - name: Upload JaCoCo report as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: jacoco-report
+          path: /reports/jacoco.xml
           

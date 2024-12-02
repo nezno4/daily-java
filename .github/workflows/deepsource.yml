@@ -28,7 +28,10 @@ jobs:
         
       - name: Run tests
         run: mvn test
-        
+
+      - name: List files for debugging
+        run: ls -R reports/jacoco
+     
       - name: Generate test coverage report
         run: mvn jacoco:report
         
@@ -36,5 +39,5 @@ jobs:
         uses: deepsourcelabs/test-coverage-action@master
         with:
           key: java
-          coverage-file: reports/jacoco.xml
+          coverage-file: reports/jacoco/jacoco.xml
           dsn: ${{ secrets.DEEPSOURCE_DSN }}

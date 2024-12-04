@@ -1,0 +1,30 @@
+name: Check Branch Name
+
+on:
+  push:
+    branches:
+      - '*'
+  pull_request:
+    branches:
+      - '*'
+
+jobs:
+  check-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Validate branch name
+        run: |
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            BRANCH_NAME=${GITHUB_HEAD_REF}
+          else
+            BRANCH_NAME=${GITHUB_REF##*/}
+          fi
+          
+          if [[ ! "$BRANCH_NAME" =~ ^(docs|feature|bugfix|hotfix|release|chore|refactor)/[a-z0-9]+(-[a-z0-9]+)* ]]; then
+            echo "Invalid branch name: $BRANCH_NAME"
+            echo "Branch names must start with: 'docs|feature|bugfix|hotfix|release|chore|refactor'/"
+            exit 1
+          fi

@@ -17,7 +17,12 @@ jobs:
 
       - name: Validate branch name
         run: |
-          BRANCH_NAME=${GITHUB_REF##*/}
+          if [[ "$GITHUB_EVENT_NAME" == "pull_request" ]]; then
+            BRANCH_NAME=${GITHUB_HEAD_REF}
+          else
+            BRANCH_NAME=${GITHUB_REF##*/}
+          fi
+          
           if [[ ! "$BRANCH_NAME" =~ ^(docs|feature|bugfix|hotfix|release|chore|refactor)/[a-z0-9]+(-[a-z0-9]+)* ]]; then
             echo "Invalid branch name: $BRANCH_NAME"
             echo "Branch names must start with: 'docs|feature|bugfix|hotfix|release|chore|refactor'/"

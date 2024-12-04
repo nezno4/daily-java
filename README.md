@@ -54,9 +54,16 @@ The main development branch is named `main`.
 
 > [!NOTE]
 > The main branch is **protected** by the following rules:
->  - restrict deletions
+>  - require linear history
 >  - require a pull request before merging
+>    - dismiss stale pull request approvals when new commits are pushed
+>    - require review from Code Owners
+>    - require approval of the most recent reviewable push
+>    - require conversation resolution before merging
 >  - block force pushes
+>  - restrict creations / updates / deletions with bypass for deepsource
+>  - require status checks to pass
+>    - require branches to be up to date before merging
 
 #### Prefixes for Branch
 - **docs/:** Branches used for configuration and modifications of the project environment.

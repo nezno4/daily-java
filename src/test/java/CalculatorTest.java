@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-
 import java.io.File;
 
 class CalculatorTest {
@@ -19,7 +18,7 @@ class CalculatorTest {
     @Test
     void testAdd() {
         LOGGER.info("Starting addition test");
-
+      
         Calculator calculator = new Calculator();
         assertEquals(5, calculator.add(2, 3));
         assertEquals(0, calculator.add(0, 0));

@@ -1,0 +1,28 @@
+environment:
+    global:
+        COVERAGE_IGNORE_WINDOWS: '# pragma: windows no cover'
+        TOX_TESTENV_PASSENV: COVERAGE_IGNORE_WINDOWS
+    matrix:
+        - TOXENV: py27
+        - TOXENV: py36
+
+install:
+    - "SET PATH=C:\\Python36;C:\\Python36\\Scripts;%PATH%"
+    - pip install tox virtualenv --upgrade
+    - "mkdir -p C:\\Temp"
+    - "SET TMPDIR=C:\\Temp"
+    - "curl -sSf https://sh.rustup.rs | bash -s -- -y"
+    - "SET PATH=%USERPROFILE%\\.cargo\\bin;%PATH%"
+
+# Not a C# project
+build: false
+
+before_test:
+  # Shut up CRLF messages
+  - git config --global core.safecrlf false
+
+test_script: tox
+
+cache:
+  - '%LOCALAPPDATA%\pip\cache'
+  - '%USERPROFILE%\.cache\pre-commit'

@@ -39,7 +39,7 @@
      * @return the product of a and b
      */
     public int multiply(int a, int b) {
-<span class="nc" id="L42">        return a * b;</span>
+<span class="fc" id="L42">        return a * b;</span>
     }
 
     /**
@@ -51,10 +51,10 @@
      * @throws IllegalArgumentException if b is zero
      */
     public double divide(int a, int b) {
-<span class="nc bnc" id="L54" title="All 2 branches missed.">        if (b == 0) {</span>
-<span class="nc" id="L55">            throw new IllegalArgumentException(&quot;Cannot divide by zero&quot;);</span>
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if (b == 0) {</span>
+<span class="fc" id="L55">            throw new IllegalArgumentException(&quot;Cannot divide by zero&quot;);</span>
         }
-<span class="nc" id="L57">        return (double) a / b;</span>
+<span class="fc" id="L57">        return (double) a / b;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
